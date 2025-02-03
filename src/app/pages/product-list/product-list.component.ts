@@ -21,7 +21,7 @@ export class ProductListComponent {
   }
 
   onProductBuy(product: Product): void {
-    this.productsService.buyProduct(product.id).subscribe({
+    this.productsService.buyProduct(product._id).subscribe({
       error: (error) => console.error('Error buying product:', error),
     });
   }
