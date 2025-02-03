@@ -1,0 +1,7 @@
+dist
+coverage
+node_modules
+.angular
+.git
+.husky
+package-lock.json 
