@@ -15,7 +15,7 @@ export class ProductsService {
     );
   }
 
-  buyProduct(productId: string): Observable<void> {
+  buyProduct(): Observable<void> {
     return of(void 0).pipe(
       delay(300),
       catchError(() => throwError(() => new Error('Failed to buy product'))),
