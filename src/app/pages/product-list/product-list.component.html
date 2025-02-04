@@ -1,5 +1,5 @@
 <ng-container *ngIf="products$ | async as products; else loading">
-  <app-card *ngFor="let product of products" [product]="product" (buy)="onProductBuy($event)"> </app-card>
+  <app-card *ngFor="let product of products" [product]="product" (buy)="onProductBuy()"> </app-card>
 </ng-container>
 
 <ng-template #loading>

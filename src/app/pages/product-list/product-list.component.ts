@@ -20,8 +20,8 @@ export class ProductListComponent {
     this.products$ = this.productsService.getProducts();
   }
 
-  onProductBuy(product: Product): void {
-    this.productsService.buyProduct(product._id).subscribe({
+  onProductBuy(): void {
+    this.productsService.buyProduct().subscribe({
       error: (error) => console.error('Error buying product:', error),
     });
   }
