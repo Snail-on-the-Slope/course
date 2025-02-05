@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CardComponent } from './card/card.component';
 import { ProductsService } from '../../shared/products/products.service';
 import { Product } from '../../shared/products/product.interface';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -14,14 +13,16 @@ import { Observable } from 'rxjs';
   styleUrl: './product-list.component.scss',
 })
 export class ProductListComponent {
-  products$: Observable<Product[]>;
+  protected productsService = inject(ProductsService);
 
-  constructor(private productsService: ProductsService) {
-    this.products$ = this.productsService.getProducts();
+  constructor() {
+    this.productsService.getProducts().subscribe({
+      error: (error) => console.error('Error loading products:', error),
+    });
   }
 
-  onProductBuy(): void {
-    this.productsService.buyProduct().subscribe({
+  onProductBuy(productId: Product['_id']): void {
+    this.productsService.buyProduct(productId).subscribe({
       error: (error) => console.error('Error buying product:', error),
     });
   }

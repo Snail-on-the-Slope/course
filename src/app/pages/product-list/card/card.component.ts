@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,17 +10,18 @@ import { Product } from '../../../shared/products/product.interface';
   imports: [MatCardModule, MatButtonModule, MatIconModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
-  @Input({ required: true }) product!: Product;
-  @Output() buy = new EventEmitter<Product>();
+  readonly product = input.required<Product>();
+  readonly buy = output<Product['_id']>();
 
   onProductBuy(event: Event): void {
     event.stopPropagation();
-    this.buy.emit(this.product);
+    this.buy.emit(this.product()._id);
   }
 
-  isStarActive(starIndex: number): boolean {
-    return this.product.rating >= starIndex;
-  }
+  isStarActive = (starIndex: number): boolean => {
+    return this.product().rating >= starIndex;
+  };
 }
