@@ -1,2 +1,15 @@
 <app-header></app-header>
-<router-outlet></router-outlet>
+
+<app-sidebar [navigationTemplate]="navigationTemplate" [contentTemplate]="contentTemplate"> </app-sidebar>
+
+<ng-template #navigationTemplate>
+  <nav>
+    <!-- Здесь будет навигация -->
+  </nav>
+</ng-template>
+
+<ng-template #contentTemplate>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</ng-template>
